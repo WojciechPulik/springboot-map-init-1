@@ -36,8 +36,8 @@ public class Covid19DataJoin {
 		
 		for(int i = 0; i < confirmed.size(); i++) {
 			resultList.add(new Point(confirmed.get(i).getLat(), confirmed.get(i).getLon(),
-					("Confirmed: " + confirmed.get(i).getText() + "\n" + 
-							" Deaths: " + deaths.get(i).getText() + "\n" + 
+					("Confirmed: " + confirmed.get(i).getText() + 
+							" Deaths: " + deaths.get(i).getText() +  
 							" Recovery: " + recovered.get(i).getText())));
 		}
 		return resultList;

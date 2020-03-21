@@ -31,8 +31,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 
 points.forEach(value => {
 L.marker([value.lat, value.lon]).addTo(map)
-    .bindPopup(value.text)
-    .openPopup();
+    .bindPopup(value.text);
 })
 
 </script>
