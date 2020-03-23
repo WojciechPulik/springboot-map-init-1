@@ -2,9 +2,12 @@ package pl.wpulik.map.service;
 
 import java.io.IOException;
 import java.io.StringReader;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.lang3.time.DateUtils;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
@@ -23,17 +26,13 @@ public class Covid19Parser {
 	private static final String URL_RECOVERED= "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/"
 			+ "csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Recovered.csv";
 	
-	private String date;
 	
 	public String getDate() {
-		return date;
+		Date date = DateUtils.addDays(new Date(), -1);
+		SimpleDateFormat dateFormat = new SimpleDateFormat("M/d/yy");
+		return dateFormat.format(date);
 	}
-	
-	public void setDate(String date) {
-		this.date = date;
-	}
-	
-	
+		
 	private List<Point> getCovidData(String url, String date) {
 		List<Point> points = new ArrayList<>();
 		RestTemplate restTemplate = new RestTemplate();
@@ -55,15 +54,15 @@ public class Covid19Parser {
 	}
 	
 	public List<Point> confirmed( ){
-		List <Point> resultList = getCovidData(URL_CONFIRMED, "3/20/20");
+		List <Point> resultList = getCovidData(URL_CONFIRMED, getDate());
 		return resultList;
 	}
 	public List<Point> deaths( ){
-		List <Point> resultList = getCovidData(URL_DEATHS, "3/20/20");
+		List <Point> resultList = getCovidData(URL_DEATHS, getDate());
 		return resultList;
 	}
 	public List<Point> recovered( ){
-		List <Point> resultList = getCovidData(URL_RECOVERED, "3/20/20");
+		List <Point> resultList = getCovidData(URL_RECOVERED, getDate());
 		return resultList;
 	}
 	
